@@ -4,7 +4,7 @@ UnicodeTrieBuilder = require 'unicode-trie/builder'
 
 log2 = Math.log2 or (n) ->
   Math.log(n) / Math.LN2
-  
+
 bits = (n) ->
   (log2(n) + 1) | 0
 
@@ -18,7 +18,7 @@ scriptCount = 0
 eawCount = 0
 
 for codePoint in codePoints when codePoint?
-  categories[codePoint.category] ?= categoryCount++  
+  categories[codePoint.category] ?= categoryCount++
   combiningClasses[codePoint.combiningClassName] ?= combiningClassCount++
   scripts[codePoint.script] ?= scriptCount++
   eaws[codePoint.eastAsianWidth] ?= eawCount++
@@ -58,27 +58,31 @@ numericValue = (numeric) ->
         while (mant % 60) is 0
           mant /= 60
           ++exp
-      
+
         ((mant + 0xbf) << 2) + (exp - 1)
   else
     0
 
 trie = new UnicodeTrieBuilder
-for codePoint in codePoints when codePoint?  
+for codePoint in codePoints when codePoint?
   category = categories[codePoint.category]
   combiningClass = combiningClasses[codePoint.combiningClassName] or 0
   script = scripts[codePoint.script] or 0
   eaw = eaws[codePoint.eastAsianWidth] or 0
-  
+
   val = (category << categoryShift) |
         (combiningClass << combiningShift) |
         (script << scriptShift) |
         (eaw << eawShift) |
         numericValue(codePoint.numeric)
-  
+
   trie.set codePoint.code, val
 
-fs.writeFileSync 'data.trie', trie.toBuffer()
+
+# Trie is serialized suboptimally as JSON so it can be loaded via require,
+# allowing unicode-properties to work in the browser
+fs.writeFileSync 'trie.json', JSON.stringify trie.toBuffer()
+
 fs.writeFileSync 'data.json', JSON.stringify
   categories: Object.keys(categories)
   combiningClasses: Object.keys(combiningClasses)
