@@ -1,4 +1,4 @@
-*NOTE:* All credit for this code belongs to the developers of https://github.com/devongovett/unicode-properties
+**NOTE:** All credit for this code belongs to the developers of https://github.com/devongovett/unicode-properties
 # Purpose of this Fork
 This fork was created for use in https://github.com/Hopding/pdf-lib.
 
