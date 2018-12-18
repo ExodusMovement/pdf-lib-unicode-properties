@@ -1,4 +1,4 @@
-const unicode = require('../index.js');
+const unicode = require('../src/index.js');
 const assert = require('assert');
 
 describe('unicode-properties', () => {

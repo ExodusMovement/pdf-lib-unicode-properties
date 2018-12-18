@@ -9,26 +9,40 @@ config.verbose = true;
 target.all = () => {
   target.clean();
   target.generateTrieJson();
+  target.compileBabel();
   target.rollupUMD();
   target.rollupUMDMin();
 };
 
 target.generateTrieJson = () => {
-  exec('node generate.js');
+  mkdir('es')
+  mkdir('lib')
+  mkdir('dist')
+  exec('babel-node src/generate.js');
+  cp('data.json', 'trie.json', 'src');
+  cp('data.json', 'trie.json', 'es');
+  cp('data.json', 'trie.json', 'lib');
 };
+
+target.compileBabel = () => {
+  env.MODULE_TYPE = 'es6';
+  exec(`babel src/index.js --out-dir es`);
+  env.MODULE_TYPE = 'commonjs';
+  exec(`babel src/index.js --out-dir lib`);
+}
 
 target.rollupUMD = () => {
   target.generateTrieJson();
   env.UGLIFY = false;
-  exec('rollup -c rollup.config.js -o unicode-properties.js');
+  exec('rollup -c rollup.config.js -o dist/unicode-properties.js');
 };
 
 target.rollupUMDMin = () => {
   target.generateTrieJson();
   env.UGLIFY = true;
-  exec('rollup -c rollup.config.js -o unicode-properties.min.js');
+  exec('rollup -c rollup.config.js -o dist/unicode-properties.min.js');
 };
 
 target.clean = () => {
-  rm('-f', 'data.json', 'trie.json', 'unicode-properties.js', 'unicode-properties.min.js');
+  rm('-rf', 'data.json', 'trie.json', 'src/data.json', 'src/trie.json', 'dist', 'lib', 'es');
 };

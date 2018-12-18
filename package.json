@@ -7,24 +7,29 @@
     "test": "test"
   },
   "dependencies": {
+    "@babel/node": "^7.2.2",
     "unicode-trie": "^0.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.0",
     "@babel/core": "^7.2.2",
+    "@babel/plugin-transform-modules-commonjs": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
+    "@babel/register": "^7.0.0",
     "codepoints": "^1.2.0",
     "mocha": "^5.2.0",
     "rollup": "^0.68.0",
     "rollup-plugin-analyzer": "^2.1.0",
     "rollup-plugin-babel": "^4.1.0",
+    "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-local-resolve": "^1.0.7",
+    "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-uglify": "^6.0.0",
     "shelljs": "^0.8.3"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "NODE_ENV=test mocha",
     "make": "node Makefile.js",
     "clean": "node Makefile.js clean"
   },
