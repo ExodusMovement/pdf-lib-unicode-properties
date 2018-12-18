@@ -2,3 +2,5 @@
 node_modules/
 dist/
 unicode-properties.*.js
+unicode-properties.js
+unicode-properties.min.js
