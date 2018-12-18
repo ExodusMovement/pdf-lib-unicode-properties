@@ -2,10 +2,6 @@ const codePoints = require('codepoints');
 const fs = require('fs');
 const UnicodeTrieBuilder = require('unicode-trie/builder');
 
-// import codePoints from 'codepoints';
-// import fs from 'fs';
-// import UnicodeTrieBuilder from 'unicode-trie/builder';
-
 const log2 = Math.log2 || (n => Math.log(n) / Math.LN2);
 
 const bits = n => (log2(n) + 1) | 0;
