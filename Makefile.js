@@ -19,12 +19,12 @@ target.generateTrieJson = () => {
   mkdir('lib')
   mkdir('dist')
   exec('babel-node src/generate.js');
-  cp('data.json', 'trie.json', 'src');
-  cp('data.json', 'trie.json', 'es');
-  cp('data.json', 'trie.json', 'lib');
+  cp('src/data.json', 'src/trie.json', 'es');
+  cp('src/data.json', 'src/trie.json', 'lib');
 };
 
 target.compileBabel = () => {
+  target.generateTrieJson();
   env.MODULE_TYPE = 'es6';
   exec(`babel src/index.js --out-dir es`);
   env.MODULE_TYPE = 'commonjs';
@@ -44,5 +44,5 @@ target.rollupUMDMin = () => {
 };
 
 target.clean = () => {
-  rm('-rf', 'data.json', 'trie.json', 'src/data.json', 'src/trie.json', 'dist', 'lib', 'es');
+  rm('-rf', 'src/data.json', 'src/trie.json', 'dist', 'lib', 'es');
 };

@@ -1,6 +1,8 @@
 const codePoints = require('codepoints');
 const fs = require('fs');
 const UnicodeTrieBuilder = require('unicode-trie/builder');
+const pako = require('pako');
+const base64 = require('base64-arraybuffer');
 
 const log2 = Math.log2 || (n => Math.log(n) / Math.LN2);
 
@@ -96,11 +98,18 @@ for (codePoint of Array.from(codePoints)) {
 
 // Trie is serialized suboptimally as JSON so it can be loaded via require,
 // allowing unicode-properties to work in the browser
-fs.writeFileSync('./trie.json', JSON.stringify(trie.toBuffer()));
+const trieFilePath = __dirname + '/trie.json';
+const jsonBase64DeflatedTrie = JSON.stringify(base64.encode(pako.deflate(trie.toBuffer())));
+fs.writeFileSync(trieFilePath, jsonBase64DeflatedTrie);
 
-fs.writeFileSync('./data.json', JSON.stringify({
+const data = {
   categories: Object.keys(categories),
   combiningClasses: Object.keys(combiningClasses),
   scripts: Object.keys(scripts),
   eaw: Object.keys(eaws)
-}));
+};
+
+const dataFilePath = __dirname + '/data.json';
+const dataJsonBytes = JSON.stringify(data).split('').map(c => c.charCodeAt(0));
+const jsonBase64DeflatedData = JSON.stringify(base64.encode(pako.deflate(dataJsonBytes)));
+fs.writeFileSync(dataFilePath, jsonBase64DeflatedData);

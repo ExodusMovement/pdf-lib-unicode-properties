@@ -1,8 +1,15 @@
 import UnicodeTrie from 'unicode-trie';
-import data from './data.json';
+import pako from 'pako';
+import * as base64 from 'base64-arraybuffer';
 
-import trieBuffer from './trie.json';
-const trieData = new Uint8Array(trieBuffer.data);
+import base64DeflatedData from './data.json';
+import base64DeflatedTrie from './trie.json';
+
+// Trie is serialized as a Buffer in node, but here
+// we may be running in a browser so we make an Uint8Array
+const data = JSON.parse(String.fromCharCode(...pako.inflate(base64.decode(base64DeflatedData))));
+const trieData = pako.inflate(base64.decode(base64DeflatedTrie));
+
 const trie = new UnicodeTrie(trieData);
 
 const log2 = Math.log2 || (n => Math.log(n) / Math.LN2);
