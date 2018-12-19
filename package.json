@@ -1,10 +1,15 @@
 {
-  "name": "unicode-properties",
-  "version": "1.1.0",
+  "name": "@pdf-lib/unicode-properties",
+  "version": "0.0.0",
   "description": "Provides fast access to unicode character properties",
   "main": "lib/index.js",
   "unpkg": "dist/unicode-properties.min.js",
   "module": "es/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test mocha",
+    "make": "node Makefile.js",
+    "clean": "node Makefile.js clean"
+  },
   "dependencies": {
     "base64-arraybuffer": "^0.1.5",
     "pako": "^1.0.6",
@@ -27,14 +32,9 @@
     "rollup-plugin-terser": "^3.0.0",
     "shelljs": "^0.8.3"
   },
-  "scripts": {
-    "test": "NODE_ENV=test mocha",
-    "make": "node Makefile.js",
-    "clean": "node Makefile.js clean"
-  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/devongovett/unicode-properties.git"
+    "url": "git://github.com/Hopding/unicode-properties.git"
   },
   "keywords": [
     "unicode",
@@ -42,10 +42,13 @@
     "character",
     "codepoint"
   ],
-  "author": "Devon Govett <devongovett@gmail.com>",
-  "license": "MIT",
+  "author": "Andrew Dillon <andrew.dillon.j@gmail.com>",
+  "contributors": [
+    "Devon Govett <devongovett@gmail.com> (http://badassjs.com/)"
+  ],
   "bugs": {
-    "url": "https://github.com/devongovett/unicode-properties/issues"
+    "url": "https://github.com/Hopding/unicode-properties/issues"
   },
-  "homepage": "https://github.com/devongovett/unicode-properties"
+  "license": "MIT",
+  "homepage": "https://github.com/Hopding/unicode-properties"
 }
