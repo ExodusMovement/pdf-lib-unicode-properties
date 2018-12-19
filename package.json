@@ -19,13 +19,12 @@
     "codepoints": "^1.2.0",
     "mocha": "^5.2.0",
     "rollup": "^0.68.0",
-    "rollup-plugin-analyzer": "^2.1.0",
     "rollup-plugin-babel": "^4.1.0",
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-json": "^3.1.0",
     "rollup-plugin-local-resolve": "^1.0.7",
     "rollup-plugin-node-resolve": "^4.0.0",
-    "rollup-plugin-uglify": "^6.0.0",
+    "rollup-plugin-terser": "^3.0.0",
     "shelljs": "^0.8.3"
   },
   "scripts": {
