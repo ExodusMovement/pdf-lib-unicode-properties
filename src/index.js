@@ -7,7 +7,11 @@ import base64DeflatedTrie from './trie.json';
 
 // Trie is serialized as a Buffer in node, but here
 // we may be running in a browser so we make an Uint8Array
-const data = JSON.parse(String.fromCharCode(...pako.inflate(base64.decode(base64DeflatedData))));
+const data = JSON.parse(
+  String.fromCharCode.apply(
+    String, pako.inflate(base64.decode(base64DeflatedData))
+  ),
+);
 const trieData = pako.inflate(base64.decode(base64DeflatedTrie));
 
 const trie = new UnicodeTrie(trieData);
