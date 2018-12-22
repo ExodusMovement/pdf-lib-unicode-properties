@@ -1,12 +1,24 @@
-**NOTE:** All credit for this code belongs to the developers of https://github.com/devongovett/unicode-properties
 # Purpose of this Fork
-This fork was created for use in https://github.com/Hopding/pdf-lib.
+This project is a fork of https://github.com/foliojs/unicode-properties created for use in https://github.com/Hopding/pdf-lib.
 
-The original repository serialized and loaded the trie data using a binary file. This worked fine in Node, because `fs.readFileSync` was being called to load the serialized data into a `Buffer` object. In order to support use in the browser, Browserify and [`brfs`](https://github.com/browserify/brfs) were used to inline the binary data in the `index.js` file, and thereby remove the call to `fs.readFileSync`.
+Listed below are changes that have been made in this fork:
 
-This works fine if you are in a Node environment, or are using Browserify to bundle your code for use in the browser. But it doesn't work so well if you aren't doing either of those things. E.g. I was writing an app built with `create-react-app`, and the binary data was not being inlined for this dependency.
+* Store binary data as compressed base64 JSON so the `fs` module isn't needed to read it back:
+  * [13160b](https://github.com/Hopding/unicode-properties/commit/13160bd299525fd4effd867e9020c955ce8e07d3)
+  * [d97bf46](https://github.com/Hopding/unicode-properties/commit/d97bf46ebdcef78f838f0803ec3643e608410add)
+  * [e95c52f](https://github.com/Hopding/unicode-properties/commit/e95c52f1c98e82bf159e4a9daf5452a09c0a3c44)
+* Update to babel 7, replace Browserify with Rollup, and build UMDs
+  * [3db56ad](https://github.com/Hopding/unicode-properties/commit/3db56ad605cb1517e64874f80a0f915c64538707)
+* Build non-rolled-up ES6 and CommonJS in es/ and lib/ directories:
+  * [cae7a5b](https://github.com/Hopding/unicode-properties/commit/cae7a5b0ca4f8f0a95b2f1f0592f55c93057166d)
+* Released to NPM as `@pdf-lib/unicode-properties`
+  * [a2d46c4](https://github.com/Hopding/unicode-properties/commit/a2d46c4f8cb837e24fdc8d298a8bff756e58bef3)
 
-I resolved this by simply serializing the trie data to a JSON file, which allows it to be loaded into the `index.js` file without using Browserify. Of course, this means that the trie data is not stored as efficiently, but that is not a concern for me.
+Also see
+* https://github.com/Hopding/fontkit
+* https://github.com/Hopding/brotli.js
+* https://github.com/Hopding/restructure
+* https://github.com/Hopding/png-ts
 
 # unicode-properties
 
