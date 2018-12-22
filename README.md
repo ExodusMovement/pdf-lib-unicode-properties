@@ -28,7 +28,7 @@ properties for all code points into just 12KB.
 ## Usage
 
 ```js
-import unicode from 'unicode-properties';
+import unicode from '@pdf-lib/unicode-properties';
 
 unicode.getCategory('2'.charCodeAt()) //=> 'Nd'
 unicode.getNumericValue('2'.charCodeAt()) //=> 2
@@ -58,7 +58,7 @@ When using a UMD build, you will have access to a global `window.UnicodeProperti
 
 ```javascript
 // NPM module
-import unicode from 'pdf-lib';
+import unicode from '@pdf-lib/unicode-properties';
 
 // UMD module
 var unicode = window.UnicodeProperties;
