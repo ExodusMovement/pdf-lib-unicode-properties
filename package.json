@@ -12,8 +12,6 @@
     "clean": "node Makefile.js clean"
   },
   "dependencies": {
-    "base64-arraybuffer": "^0.1.5",
-    "pako": "^1.0.6",
     "unicode-trie": "^0.3.0"
   },
   "devDependencies": {

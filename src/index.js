@@ -1,6 +1,5 @@
 import UnicodeTrie from 'unicode-trie';
-import pako from 'pako';
-import * as base64 from 'base64-arraybuffer';
+import zlib from 'zlib';
 
 import base64DeflatedData from './data.json';
 import base64DeflatedTrie from './trie.json';
@@ -8,11 +7,9 @@ import base64DeflatedTrie from './trie.json';
 // Trie is serialized as a Buffer in node, but here
 // we may be running in a browser so we make an Uint8Array
 const data = JSON.parse(
-  String.fromCharCode.apply(
-    String, pako.inflate(base64.decode(base64DeflatedData))
-  ),
+  zlib.inflateSync(Buffer.from(base64DeflatedData, 'base64')).toString()
 );
-const trieData = pako.inflate(base64.decode(base64DeflatedTrie));
+const trieData = zlib.inflateSync(Buffer.from(base64DeflatedTrie, 'base64'));
 
 const trie = new UnicodeTrie(trieData);
 
