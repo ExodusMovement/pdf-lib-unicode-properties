@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Provides fast access to unicode character properties",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "NODE_ENV=test mocha",
     "make": "node Makefile.js",
